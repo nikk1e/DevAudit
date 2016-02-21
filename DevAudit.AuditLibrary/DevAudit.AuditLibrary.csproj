@@ -51,6 +51,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SemverSharp.Parser, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SemverSharp.0.1.1.0\lib\net45\SemverSharp.Parser.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -113,12 +117,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Examples\Drupal\core\modules\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\SemverSharp\SemverSharp.Parser\SemverSharp.Parser.csproj">
-      <Project>{97958544-e970-4877-af36-b4543b60415d}</Project>
-      <Name>SemverSharp.Parser</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
