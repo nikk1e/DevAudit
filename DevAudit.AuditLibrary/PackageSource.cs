@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 using CSharpTest.Net.Collections;
 using CSharpTest.Net.Serialization;
+using Sprache;
 
 namespace DevAudit.AuditLibrary
 {
@@ -54,7 +55,7 @@ namespace DevAudit.AuditLibrary
         }
 
         public bool ProjectVulnerabilitiesCacheDump { get; set; }
-
+        
         public IEnumerable<string> ProjectVulnerabilitiesCacheKeys
         {
             get
@@ -76,6 +77,10 @@ namespace DevAudit.AuditLibrary
                    select artifact;
             }
         }
+
+        public bool UseDockerContainer { get; set; }
+
+        public string DockerContainerId { get; set; }
       
         public Dictionary<string, object> PackageSourceOptions { get; set; } = new Dictionary<string, object>();
 
@@ -220,6 +225,7 @@ namespace DevAudit.AuditLibrary
                 this.PackageManagerConfigurationFile = "";
             }
 
+            #region Cache option
             if (this.PackageSourceOptions.ContainsKey("Cache") && (bool) this.PackageSourceOptions["Cache"] == true)
             {
                 this.ProjectVulnerabilitiesCacheEnabled = true;
@@ -265,6 +271,37 @@ namespace DevAudit.AuditLibrary
             {
                 this.ProjectVulnerabilitiesCacheEnabled = false;
             }
+            #endregion
+
+            #region User Docker container option
+            if (this.PackageSourceOptions.ContainsKey("DockerContainerId"))
+            {
+                Docker.ProcessStatus process_status;
+                string process_output, process_error;
+                if (Docker.GetContainer((string)this.PackageSourceOptions["DockerContainerId"], out process_status, out process_output, out process_error))
+                {
+                    this.UseDockerContainer = true;
+                    this.DockerContainerId = (string)this.PackageSourceOptions["DockerContainerId"];
+                }
+                else
+                {
+                    if (process_status == Docker.ProcessStatus.DockerNotInstalled)
+                    {
+                        throw new ArgumentException(string.Format("Failed to find docker container {0}. Docker does not appear to be installed or the command-line tools are not on the current PATH. Error is:  {1}",
+                            (string)this.PackageSourceOptions["DockerContainerId"], process_error));
+                    }
+                    else 
+                    {
+                        throw new ArgumentException(string.Format("Failed to find docker container {0}. Error is:  {1}",
+                            (string)this.PackageSourceOptions["DockerContainerId"], process_error));
+                    }
+                }
+            }
+            else
+            {
+                this.UseDockerContainer = false;
+            }
+            #endregion
         }
         #endregion
 
@@ -399,7 +436,7 @@ namespace DevAudit.AuditLibrary
             {
                 throw new Exception("Project vulnerabilities cache is not enabled.");
             }
-
+            
         }
         #endregion
 

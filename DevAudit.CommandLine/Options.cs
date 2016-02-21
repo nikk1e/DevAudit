@@ -53,7 +53,6 @@ namespace DevAudit.CommandLine
         [Option('k', "cache-dump", Required = false, HelpText = "Cache Dump - projects and vulnearabilities will be cached for the number of minutes specified here.")]
         public bool CacheDump { get; set; }
 
-
         [ParserState]
         public IParserState LastParserState { get; set; }
         
