@@ -330,15 +330,15 @@ namespace DevAudit.CommandLine
                     OSSIndexProject p = vulnerabilities.Key;
                     OSSIndexArtifact a = p.Artifact;
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("[{0}/{1}] {2} {3}", projects_processed, projects_count, a.PackageName, string.IsNullOrEmpty(a.Version) ? "" : 
-                        string.Format("({0}) ", a.Version));
+                    Console.Write("[{0}/{1}] {2} ({3}) ", projects_processed, projects_count, p.Package.Name, p.Package.Version);
                     Console.ResetColor();
                     if (vulnerabilities.Value.Count() == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
                         Console.Write("no known vulnerabilities. ");
                         Console.ResetColor();
-                        Console.Write("[{0} {1}]\n", p.Package.Name, p.Package.Version);
+                        //Console.Write("[{0} {1}]\n", p.Package.Name, p.Package.Version);
+                        Console.Write("\n");
                     }
                     else
                     {
@@ -369,7 +369,8 @@ namespace DevAudit.CommandLine
                         Console.Write("{0} known vulnerabilities, ", vulnerabilities.Value.Count()); //vulnerabilities.Value.GroupBy(v => new { v.CVEId, v.Uri, v.Title, v.Summary }).SelectMany(v => v).Count(),
                         Console.Write("{0} affecting installed version. ", found_vulnerabilities.Count());
                         Console.ResetColor();
-                        Console.Write("[{0} {1}]\n", p.Package.Name, p.Package.Version);
+                        //Console.Write("[{0} {1}]\n", p.Package.Name, p.Package.Version);
+                        Console.Write("\n");
                         found_vulnerabilities.ForEach(v =>
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
