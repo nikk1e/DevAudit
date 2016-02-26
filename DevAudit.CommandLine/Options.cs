@@ -35,8 +35,8 @@ namespace DevAudit.CommandLine
 		[VerbOption("composer", HelpText = "Audit PHP Composer packages. Use the --file option to specify a particular composer.json file otherwise the one in the current directory will be used.")]
         public Options AuditComposer { get; set; }
 
-		[VerbOption("dpkg", HelpText = "Audit dpkg packages. The packages are scanned from the system dpkg repository.")]
-		public Options AuditDpkg { get; set; }
+		//[VerbOption("dpkg", HelpText = "Audit dpkg packages. The packages are scanned from the system dpkg repository.")]
+		//public Options AuditDpkg { get; set; }
 
 		[VerbOption("drupal", HelpText = "Audit a Drupal application instance. Use the --root option to specify the root directory of the Drupal instance, otherwise the current directory will be used.")]
         public Options AuditDrupal { get; set; }
@@ -65,8 +65,8 @@ namespace DevAudit.CommandLine
         [Option('r', "root", Required = false, HelpText = "The root directory of the application instance to audit.")]
         public string RootDirectory { get; set; }
 
-        [Option('d', "docker-container", Required = false, HelpText = "Run the audit on a docker container with this id. The command line docker tools are used to execute the required commands on the docker container.")]
-        public string DockerContainerId { get; set; }
+        //[Option('d', "docker-container", Required = false, HelpText = "Run the audit on a docker container with this id. The command line docker tools are used to execute the required commands on the docker container.")]
+        //public string DockerContainerId { get; set; }
 
         [ParserState]
         public IParserState LastParserState { get; set; }

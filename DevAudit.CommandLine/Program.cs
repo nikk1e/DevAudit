@@ -62,10 +62,10 @@ namespace DevAudit.CommandLine
                     audit_options.Add("RootDirectory", ProgramOptions.RootDirectory);
                 }
 
-                if (!string.IsNullOrEmpty(ProgramOptions.DockerContainerId))
-                {
-                    audit_options.Add("DockerContainerId", ProgramOptions.DockerContainerId);
-                }
+                //if (!string.IsNullOrEmpty(ProgramOptions.DockerContainerId))
+                //{
+                //    audit_options.Add("DockerContainerId", ProgramOptions.DockerContainerId);
+                //}
 
 
             }
