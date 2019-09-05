@@ -42,6 +42,9 @@ namespace DevAudit.CommandLine
         [VerbOption("netcore", HelpText = "Audit a .NET Core application or .NET Standard library's dependencies. Use the -f option to specify the path to the .csproj project file or the .deps.json dependencies manifest file.")]
         public Options NetCore { get; set; }
 
+        [VerbOption("libman", HelpText = "Audit a Libman.json file")]
+        public Options Libman { get; set; }
+
         [Option('d', "enable-debug", Required = false, HelpText = "Enable printing debug messages and other behavior useful for debugging the program.")]
         public bool EnableDebug { get; set; }
 

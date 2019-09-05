@@ -700,6 +700,10 @@ namespace DevAudit.CommandLine
                     {
                         Source = new YumPackageSource(audit_options, EnvironmentMessageHandler);
                     }
+                    else if (verb == "libman")
+                    {
+                        Source = new LibmanPackageSource(audit_options, EnvironmentMessageHandler);
+                    }
                 }
                 catch (ArgumentException ae)
                 {
